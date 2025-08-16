@@ -1,4 +1,5 @@
 import { unzip } from 'unzipit';
+import { useStore } from '../stores/device';
 
 export function downloadChart(songData: ISongModInfo): Promise<{
     fileName: string
@@ -26,12 +27,16 @@ export function downloadChart(songData: ISongModInfo): Promise<{
 }
 
 export async function downloadChartIndividual(songData: ISongModInfo) {
+    const store = useStore()
+
     try {
+        store.currentStatus = `Downloading ${songData.name}`
         const chartFile = await downloadChart(songData)
         const url = URL.createObjectURL(chartFile.blob)
         const a = document.createElement("a")
         a.href = url;
         a.download = chartFile.fileName;
+        store.currentStatus = ""
         a.click();
         URL.revokeObjectURL(url);
     } catch (err) {

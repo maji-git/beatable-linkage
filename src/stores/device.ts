@@ -9,6 +9,18 @@ export const useEmitter = defineStore('mitt', {
   },
 })
 
+
+export const useStore = defineStore('counter', {
+  state: () => {
+    return {
+        currentStatus: ""
+    }
+  },
+  actions: {
+  },
+})
+
+
 export const useDeviceStore = defineStore('counter', {
   state: () => {
     return {
@@ -21,11 +33,7 @@ export const useDeviceStore = defineStore('counter', {
     increment() {
     },
     installSongFromID() {
-        
+
     }
   },
-})
-
-emitter.on("install_song", (id) => {
-
 })

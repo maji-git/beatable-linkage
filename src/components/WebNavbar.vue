@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-
+import { useStore } from '../stores/device';
+const store = useStore()
 </script>
 
 <template>
@@ -23,11 +24,21 @@ import { RouterLink } from 'vue-router';
                 </div>
             </div>
         </div>
+        <p class="text-center w-100 m-0 status-text" v-if="store.currentStatus">{{ store.currentStatus }}</p>
     </nav>
 </template>
 
 <style scoped>
 .nav-link.router-link-active {
     color: whitesmoke;
+}
+
+.status-text {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 </style>

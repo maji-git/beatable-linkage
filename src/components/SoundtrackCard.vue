@@ -19,15 +19,24 @@
                 </div>
             </div>
             <div class="buttons chart-options">
-                <button class="btn">
-                    <IconArrowUp />
-                </button>
-                <button class="btn" @click="downloadChartIndividual(songData)">
-                    <IconDownload />
-                </button>
-                <a class="btn" target="_blank" :href="songData.profile_url">
-                    <IconExternalLink />
-                </a>
+                <VTooltip placement="right-start">
+                    <button class="btn">
+                        <IconArrowUp />
+                    </button>
+                    <template #popper>Upload to headset</template>
+                </VTooltip>
+                <VTooltip placement="right-start">
+                    <button class="btn" @click="downloadChartIndividual(songData)">
+                        <IconDownload />
+                    </button>
+                    <template #popper>Download</template>
+                </VTooltip>
+                <VTooltip placement="right-start">
+                    <a class="btn" target="_blank" :href="songData.profile_url">
+                        <IconExternalLink />
+                    </a>
+                    <template #popper>View on mod.io</template>
+                </VTooltip>
             </div>
         </div>
     </div>
@@ -39,6 +48,7 @@ import { inject, onMounted, ref } from 'vue';
 import SoundtrackStats from './SoundtrackStats.vue';
 import SoundtrackDiff from './SoundtrackDiff.vue';
 import { downloadChartIndividual } from '../utils/chart';
+import { vTooltip } from 'floating-vue';
 
 const props = defineProps<{
     coverArt: string,
@@ -52,7 +62,6 @@ const props = defineProps<{
 </script>
 
 <style scoped>
-
 .st-card-container {
     background-color: hsl(0, 0%, 15%);
     border-radius: 8px;

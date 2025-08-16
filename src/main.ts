@@ -1,10 +1,12 @@
 import { createApp } from 'vue'
 import 'bootstrap/js/index.esm.js'
+import 'floating-vue/dist/style.css'
 import './style.scss'
 import App from './App.vue'
 import { createWebHistory, createRouter } from 'vue-router'
 import routes from "./routes"
 import { createPinia } from 'pinia'
+import FloatingVue from 'floating-vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,9 +24,12 @@ app.provide("difficultyData", {
     "Unbeatable": "#9810FA"
   },
 })
+
 app.provide("deviceData", {
   CUSTOM_SONG_LOCATION: "storage/emulated/0/Android/data/com.xrgames.beatable/files/CustomSongs"
 })
+
 app.use(router)
 app.use(pinia)
+app.use(FloatingVue)
 app.mount('#app')

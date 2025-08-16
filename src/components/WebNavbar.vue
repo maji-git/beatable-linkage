@@ -34,11 +34,11 @@ const store = useStore()
 }
 
 .status-text {
-    animation: fadeIn 0.5s;
+    animation: statusIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes fadeIn {
-    0% { opacity: 0; }
+@keyframes statusIn {
+    0% { opacity: 0; transform: translateY(-12px); }
     100% { opacity: 1; }
 }
 </style>

@@ -1,0 +1,29 @@
+$card-bg:  hsl(267, 59%, 20%);
+
+@import 'bootstrap';
+
+body {
+    font-family: "Funnel Sans", sans-serif;
+    background-color: hsl(267, 59%, 8%);
+}
+
+.bg-body-tertiary {
+    background-color: hsl(267, 59%, 20%) !important;
+}
+
+.banner {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(20,20,20);
+    border-radius: 8px;
+    padding: 3em 0em;
+    margin-bottom: 1em;
+}
+
+.avatar-img {
+    border-radius: 50%;
+}

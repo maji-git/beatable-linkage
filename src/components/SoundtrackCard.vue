@@ -1,0 +1,142 @@
+<template>
+    <div class="st-card-container col-md-5 p-0 m-2" :style="{ 'background-image': `url(${coverArt})` }">
+        <div class="soundtrack-card">
+            <div class="coverart" :style="{ 'background-image': `url(${coverArt})` }">
+                <RouterLink :to="`/song/${songData.name_id}`" class="btn preview-song">
+                    <IconArrowUpRight />
+                </RouterLink>
+            </div>
+
+            <div class="contents">
+                <div class="song-metadata">
+                    <RouterLink :to="`/song/${songData.name_id}`" class="song-title">{{ songTitle }}</RouterLink>
+                    <p>mapped by <a :href="songMapper.profile_url">{{ songMapper.username }}</a></p>
+                    <SoundtrackDiff :songData="songData" />
+                </div>
+
+                <div>
+                    <SoundtrackStats :songData="songData" />
+                </div>
+            </div>
+            <div class="buttons chart-options">
+                <button class="btn">
+                    <IconArrowUp />
+                </button>
+                <button class="btn" @click="downloadChartIndividual(songData)">
+                    <IconDownload />
+                </button>
+                <a class="btn" target="_blank" :href="songData.profile_url">
+                    <IconExternalLink />
+                </a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { IconArrowUp, IconArrowUpRight, IconCloudUpload, IconDownload, IconExternalLink } from '@tabler/icons-vue';
+import { inject, onMounted, ref } from 'vue';
+import SoundtrackStats from './SoundtrackStats.vue';
+import SoundtrackDiff from './SoundtrackDiff.vue';
+import { downloadChartIndividual } from '../utils/chart';
+
+const props = defineProps<{
+    coverArt: string,
+    songTitle: string
+    songMapper: {
+        profile_url: string,
+        username: string
+    },
+    songData: ISongModInfo
+}>()
+</script>
+
+<style scoped>
+
+.st-card-container {
+    background-color: hsl(0, 0%, 15%);
+    border-radius: 8px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+}
+
+.soundtrack-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(14px);
+    width: 100%;
+    display: flex;
+}
+
+.preview-song {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-song:hover {
+    opacity: 1;
+}
+
+.coverart {
+    width: 140px;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-position: center;
+    background-size: cover;
+}
+
+.contents {
+    padding: 16px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    width: 1px;
+}
+
+.song-metadata {
+    display: inline-block;
+    align-items: baseline;
+    position: relative;
+}
+
+.contents p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.contents .song-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    max-height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.chart-options {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.chart-options .btn {
+    padding: 4px;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: 2px;
+}
+
+.chart-options .btn .tabler-icon {
+    width: 16px;
+}
+</style>

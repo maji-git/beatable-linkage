@@ -1,36 +1,21 @@
-import mitt from 'mitt'
+import type { Adb, AdbSync } from '@yume-chan/adb'
 import { defineStore } from 'pinia'
+import { connectDevice, getAdb, requestDevice } from '../utils/device'
+import { AdbDaemonWebUsbDevice } from '@yume-chan/adb-daemon-webusb'
+import { useStore } from './store'
+import type { IChartFile } from '../types'
 
-const emitter = mitt()
-
-export const useEmitter = defineStore('mitt', {
-  state: () => {
-    return emitter
-  },
-})
-
-
-export const useStore = defineStore('counter', {
+export const useDeviceStore = defineStore('device', {
   state: () => {
     return {
-        currentStatus: ""
+      currentDeviceInfo: {} as any,
+      deviceConnected: false,
+      installedCharts: [] as IChartFile[]
     }
   },
   actions: {
-  },
-})
-
-
-export const useDeviceStore = defineStore('counter', {
-  state: () => {
-    return {
-        adb: null,
-        sync: null,
-        currentDeviceInfo: null
-    }
-  },
-  actions: {
-    increment() {
+    async connectDevice() {
+     
     },
     installSongFromID() {
 

@@ -1,5 +1,6 @@
 import { unzip } from 'unzipit';
-import { useStore } from '../stores/device';
+import { useStore } from '../stores/store';
+import type { ISongModInfo } from '../types';
 
 export function downloadChart(songData: ISongModInfo): Promise<{
     fileName: string

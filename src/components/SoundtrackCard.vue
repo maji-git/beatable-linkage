@@ -11,7 +11,7 @@
                 <div class="song-metadata">
                     <RouterLink :to="`/song/${songData.name_id}`" class="song-title">{{ songTitle }}</RouterLink>
                     <p>mapped by <a :href="songMapper.profile_url">{{ songMapper.username }}</a></p>
-                    <SoundtrackDiff :songData="songData" />
+                    <SoundtrackTags :songData="songData" />
                 </div>
 
                 <div>
@@ -46,7 +46,7 @@
 import { IconArrowUp, IconArrowUpRight, IconCloudUpload, IconDownload, IconExternalLink } from '@tabler/icons-vue';
 import { inject, onMounted, ref } from 'vue';
 import SoundtrackStats from './SoundtrackStats.vue';
-import SoundtrackDiff from './SoundtrackDiff.vue';
+import SoundtrackTags from './SoundtrackTags.vue';
 import { downloadChartIndividual } from '../utils/chart';
 import { vTooltip } from 'floating-vue';
 
@@ -71,9 +71,10 @@ const props = defineProps<{
 }
 
 .soundtrack-card {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: hsla(267, 59%, 8%, 0.8);
     backdrop-filter: blur(14px);
     width: 100%;
+    height: 100%;
     display: flex;
 }
 

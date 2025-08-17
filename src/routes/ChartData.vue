@@ -10,11 +10,11 @@
                             :href="songData.submitted_by.profile_url" target="_blank">{{ songData.submitted_by.username
                             }}</a>
                     </p>
-                    <SoundtrackDiff :songData="songData" />
+                    <SoundtrackTags :songData="songData" />
                     <div class="mt-3">
                         <button class="btn btn-light"><IconArrowUp/> Upload to your headset</button>
                         <button class="btn btn-outline-light ms-2"  @click="downloadChartIndividual(songData)"><IconDownload/> Download</button>
-                        <a class="btn btn-outline-light ms-2" :href="songData.profile_url"><IconExternalLink/></a>
+                        <a class="btn btn-outline-light ms-2" target="_blank" :href="songData.profile_url"><IconExternalLink/></a>
                     </div>
                 </div>
             </div>
@@ -37,9 +37,9 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import SoundtrackStats from '../components/SoundtrackStats.vue';
-import SoundtrackDiff from '../components/SoundtrackDiff.vue';
 import { IconArrowUp, IconDownload, IconExternalLink } from '@tabler/icons-vue';
 import { downloadChartIndividual } from '../utils/chart';
+import SoundtrackTags from '../components/SoundtrackTags.vue';
 
 const route = useRoute()
 const songData = ref<ISongModInfo>()
@@ -62,7 +62,7 @@ onMounted(async () => {
 }
 
 .soundtrack-info {
-    background-color: hsla(0, 0%, 0%, 0.8);
+    background-color: hsla(267, 59%, 8%, 0.8);
     backdrop-filter: blur(14px);
     display: flex;
     width: 100%;

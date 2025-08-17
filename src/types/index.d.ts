@@ -1,3 +1,5 @@
+import type { Adb, AdbSync } from "@yume-chan/adb"
+
 interface ISongModInfo {
     id: number
     name: string
@@ -37,4 +39,13 @@ interface ISongModInfo {
         }
     }
     profile_url: string
+}
+
+interface IChartFile {
+  filePath: string
+  fileName: string
+}
+
+declare global {
+    interface Window { adb: Adb; adbsync: AdbSync }
 }

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import { useStore } from '../stores/device';
+import { useDeviceStore } from '../stores/device';
+import { useStore } from '../stores/store';
+import { initializeDevice } from '../utils/device';
+import { IconCardboards } from '@tabler/icons-vue';
 const store = useStore()
+const deviceStore = useDeviceStore()
 </script>
 
 <template>
@@ -20,7 +24,17 @@ const store = useStore()
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-light" type="submit">Connect your Headset</button>
+                    <div v-if="!deviceStore.deviceConnected">
+                        <button class="btn btn-outline-light" @click="initializeDevice()" type="submit">Connect your
+                            Headset</button>
+                    </div>
+                    <RouterLink to="/device" v-if="deviceStore.deviceConnected" class="device-info me-3">
+                        <IconCardboards/>
+                        <div class="ms-3">
+                            <p class="sub">Connected Device</p>
+                            <p class="dname">{{ deviceStore.currentDeviceInfo.productName }}</p>
+                        </div>
+                    </RouterLink>
                 </div>
             </div>
         </div>
@@ -38,7 +52,34 @@ const store = useStore()
 }
 
 @keyframes statusIn {
-    0% { opacity: 0; transform: translateY(-12px); }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.device-info {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.device-info p {
+    margin: -4px;
+}
+
+.device-info .sub {
+    font-size: 12px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.device-info .dname {
+    font-size: 16px;
 }
 </style>

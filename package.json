@@ -17,12 +17,14 @@
     "bootstrap": "^5.3.7",
     "floating-vue": "^5.2.2",
     "mitt": "^3.0.1",
+    "path-browserify": "^1.0.1",
     "pinia": "^3.0.3",
     "unzipit": "^1.4.3",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@types/path-browserify": "^1.0.3",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
     "sass-embedded": "^1.90.0",

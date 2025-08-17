@@ -25,10 +25,6 @@ app.provide("difficultyData", {
   },
 })
 
-app.provide("deviceData", {
-  CUSTOM_SONG_LOCATION: "storage/emulated/0/Android/data/com.xrgames.beatable/files/CustomSongs"
-})
-
 app.use(router)
 app.use(pinia)
 app.use(FloatingVue)

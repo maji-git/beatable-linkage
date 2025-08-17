@@ -42,6 +42,7 @@ export async function getAdb(device: AdbDaemonWebUsbDevice, connection: AdbDaemo
 
 export async function initializeDevice() {
     const store = useStore()
+    const toast = useToast();
     const deviceStore = useDeviceStore()
     store.currentStatus = "Connect your headset to your computer, then select your headset from the list"
     const device = await requestDevice()
@@ -82,6 +83,7 @@ export async function initializeDevice() {
                     }
 
                     deviceStore.deviceConnected = true
+                    toast.success("Device connected!")
                     refreshChartsInDevice()
                 } else {
                     alert("Beatable is not installed")

@@ -31,7 +31,7 @@ export async function downloadChartIndividual(songData: ISongModInfo) {
     const store = useStore()
 
     try {
-        store.currentStatus = `Downloading ${songData.name}`
+        store.currentStatus = `Downloading ${songData.name}...`
         const chartFile = await downloadChart(songData)
         const url = URL.createObjectURL(chartFile.blob)
         const a = document.createElement("a")

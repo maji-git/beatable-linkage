@@ -1,5 +1,11 @@
 $card-bg:  hsl(267, 59%, 20%);
+$card-border-width: 0;
+$card-border-radius: 8px;
+$btn-border-radius: 4px;
+
 $secondary:  hsl(266, 11%, 26%);
+$primary: #f6cc37;
+$success: rgb(0, 166, 62);
 
 @import 'bootstrap';
 
@@ -12,17 +18,13 @@ body {
     background-color: hsl(267, 59%, 20%) !important;
 }
 
-.banner {
-    margin-top: 2em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: rgb(20,20,20);
-    border-radius: 8px;
-    padding: 3em 0em;
-    margin-bottom: 1em;
+.v-toast__item--success {
+    background-color: $success;
+}
+
+.main {
+    position: relative;
+    top: 84px;
 }
 
 .avatar-img {
@@ -32,4 +34,5 @@ body {
 .navbar {
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 16px 16px -8px rgba(12, 12, 13, 0.8);
 }

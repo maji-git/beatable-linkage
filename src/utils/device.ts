@@ -4,7 +4,9 @@ import { Adb, AdbDaemonTransport } from "@yume-chan/adb";
 import { useStore } from "../stores/store";
 import { useDeviceStore } from "../stores/device";
 import path from 'path-browserify';
-import type { IChartFile } from "../types";
+import type { IChartFile, ISongModInfo } from "../types";
+import { downloadChart } from "./chart";
+import { useToast } from "vue-toast-notification";
 
 const CUSTOM_SONG_LOCATION = "storage/emulated/0/Android/data/com.xrgames.beatable/files/CustomSongs"
 
@@ -41,7 +43,7 @@ export async function getAdb(device: AdbDaemonWebUsbDevice, connection: AdbDaemo
 export async function initializeDevice() {
     const store = useStore()
     const deviceStore = useDeviceStore()
-    store.currentStatus = "Please select your device from the list"
+    store.currentStatus = "Connect your headset to your computer, then select your headset from the list"
     const device = await requestDevice()
 
     if (device) {
@@ -97,6 +99,8 @@ export async function initializeDevice() {
 
             store.currentStatus = ""
         }
+    } else {
+        store.currentStatus = ""
     }
 }
 
@@ -107,21 +111,51 @@ export async function refreshChartsInDevice() {
         return
     }
 
-    deviceStore.installedCharts = []
+    const installedCharts = []
     const customSongs = await window.adbsync.readdir(CUSTOM_SONG_LOCATION)
 
     for (const song of customSongs) {
         if (song.name.endsWith(".beats")) {
-            deviceStore.installedCharts.push({
+            installedCharts.push({
                 fileName: song.name,
                 filePath: path.join(CUSTOM_SONG_LOCATION, song.name)
             })
         }
     }
+    deviceStore.installedCharts = installedCharts
 }
 
 export const deleteChartFile = async (chartFileData: IChartFile) => {
-  await window.adb.rm(chartFileData.filePath)
-  console.log(chartFileData.fileName, " Deleted")
-  refreshChartsInDevice()
+    const toast = useToast();
+    await window.adb.rm(chartFileData.filePath)
+    console.log(chartFileData.fileName, " Deleted")
+    toast.info(`${chartFileData.fileName} deleted.`)
+    refreshChartsInDevice()
+}
+
+export async function downloadChartToDevice(songData: ISongModInfo) {
+    const store = useStore()
+    const deviceStore = useDeviceStore()
+    const toast = useToast();
+
+    if (!deviceStore.deviceConnected) {
+        await initializeDevice()
+    }
+
+    if (window.adb && window.adbsync) {
+        store.currentStatus = "Downloading chart..."
+        const chartFile = await downloadChart(songData)
+        store.currentStatus = "Uploading to device..."
+        try {
+            await window.adbsync.write({
+                filename: path.join(CUSTOM_SONG_LOCATION, chartFile.fileName),
+                //@ts-expect-error Stream file
+                file: chartFile.blob.stream()
+            })
+            toast.success(`${songData.name} loaded!`)
+        } catch(err) {
+            alert(err)
+        }
+        store.currentStatus = ""
+    }
 }

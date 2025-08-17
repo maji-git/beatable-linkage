@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import { inject, onMounted, ref } from 'vue';
+import type { ISongModInfo } from '../types';
 
 const diffData = inject<any>("difficultyData")
 const difficulties = ref<string[]>([])
@@ -21,7 +22,6 @@ const props = defineProps<{
 
 onMounted(() => {
     const tags = props.songData.tags
-    console.log(diffData)
     for (const tag of tags) {
         if (diffData.types.includes(tag.name)) {
             difficulties.value.push(tag.name)

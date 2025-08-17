@@ -2,6 +2,7 @@
 import { onMounted } from 'vue';
 import { useDeviceStore } from '../stores/device';
 import { deleteChartFile, initializeDevice, refreshChartsInDevice } from '../utils/device';
+import { IconMusic } from '@tabler/icons-vue';
 
 const deviceStore = useDeviceStore()
 
@@ -38,3 +39,15 @@ const connectDevice = () => {
         <button class="btn btn-primary" @click="connectDevice">Connect your device</button>
     </div>
 </template>
+
+<style scoped>
+.soundtrack-card .card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.soundtrack-card .card-body p {
+    margin: 0;
+}
+</style>

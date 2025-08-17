@@ -12,11 +12,23 @@
                     </p>
                     <SoundtrackTags :songData="songData" />
                     <div class="mt-3">
-                        <button class="btn btn-light"><IconArrowUp/> Upload to your headset</button>
-                        <button class="btn btn-outline-light ms-2"  @click="downloadChartIndividual(songData)"><IconDownload/> Download</button>
-                        <a class="btn btn-outline-light ms-2" target="_blank" :href="songData.profile_url"><IconExternalLink/></a>
+                        <button class="btn btn-light" @click="downloadChartToDevice(songData)">
+                            <IconArrowUp /> Upload to your headset
+                        </button>
+                        <button class="btn btn-outline-light ms-2" @click="downloadChartIndividual(songData)">
+                            <IconDownload /> Download
+                        </button>
+                        <a class="btn btn-outline-light ms-2" target="_blank" :href="songData.profile_url">
+                            <IconExternalLink />
+                        </a>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <SoundtrackStats :songData="songData" />
             </div>
         </div>
 
@@ -25,10 +37,13 @@
                 About this chart
             </div>
             <div class="card-body">
-               {{ songData.summary }}
-               {{ songData.description }}
+                {{ songData.summary }}
+                {{ songData.description }}
             </div>
         </div>
+    </div>
+    <div v-else>
+        <div class="spinner-border text-primary" role="status"></div>
     </div>
 </template>
 
@@ -40,6 +55,8 @@ import SoundtrackStats from '../components/SoundtrackStats.vue';
 import { IconArrowUp, IconDownload, IconExternalLink } from '@tabler/icons-vue';
 import { downloadChartIndividual } from '../utils/chart';
 import SoundtrackTags from '../components/SoundtrackTags.vue';
+import type { ISongModInfo } from '../types';
+import { downloadChartToDevice } from '../utils/device';
 
 const route = useRoute()
 const songData = ref<ISongModInfo>()

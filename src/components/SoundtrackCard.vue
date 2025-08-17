@@ -20,7 +20,7 @@
             </div>
             <div class="buttons chart-options">
                 <VTooltip placement="right-start">
-                    <button class="btn">
+                    <button class="btn" @click="downloadChartToDevice(songData)">
                         <IconArrowUp />
                     </button>
                     <template #popper>Upload to headset</template>
@@ -44,11 +44,11 @@
 
 <script setup lang="ts">
 import { IconArrowUp, IconArrowUpRight, IconCloudUpload, IconDownload, IconExternalLink } from '@tabler/icons-vue';
-import { inject, onMounted, ref } from 'vue';
 import SoundtrackStats from './SoundtrackStats.vue';
 import SoundtrackTags from './SoundtrackTags.vue';
 import { downloadChartIndividual } from '../utils/chart';
-import { vTooltip } from 'floating-vue';
+import { downloadChartToDevice } from '../utils/device';
+import type { ISongModInfo } from '../types';
 
 const props = defineProps<{
     coverArt: string,

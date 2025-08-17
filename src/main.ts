@@ -1,12 +1,16 @@
 import { createApp } from 'vue'
+
 import 'bootstrap/js/index.esm.js'
 import 'floating-vue/dist/style.css'
+import 'vue-toast-notification/dist/theme-sugar.css';
 import './style.scss'
+
 import App from './App.vue'
 import { createWebHistory, createRouter } from 'vue-router'
 import routes from "./routes"
 import { createPinia } from 'pinia'
 import FloatingVue from 'floating-vue'
+import ToastPlugin from 'vue-toast-notification';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -28,4 +32,5 @@ app.provide("difficultyData", {
 app.use(router)
 app.use(pinia)
 app.use(FloatingVue)
+app.use(ToastPlugin);
 app.mount('#app')

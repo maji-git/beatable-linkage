@@ -4,16 +4,17 @@ import { onMounted, ref } from 'vue';
 import SoundtrackCard from '../components/SoundtrackCard.vue';
 
 const songListing = ref()
+const loadingList = ref(false)
 
 const fetchListing = async() => {
-    console.log(import.meta.env)
+    loadingList.value = true
     const req = await axios.get("/listing", {
         baseURL: import.meta.env.VITE_LISTING_SERVER_URL
     })
     const data = req.data.data
 
-    console.log(data)
     songListing.value = data
+    loadingList.value = false
 }
 
 onMounted(() => {
@@ -29,6 +30,8 @@ onMounted(() => {
         <input type="search" name="" placeholder="Search songs..." class="form-control col-md-5" id="">
     </div>
     -->
+    <div class="spinner-border text-primary" role="status" v-if="loadingList"></div>
+
     <div class="row justify-content-center">
         <SoundtrackCard v-for="song in songListing" :coverArt="song.logo.thumb_320x180" :songTitle="song.name" :songMapper="song.submitted_by" :songData="song"/>
     </div>

@@ -14,11 +14,5 @@ export const useDeviceStore = defineStore('device', {
     }
   },
   actions: {
-    async connectDevice() {
-     
-    },
-    installSongFromID() {
-
-    }
   },
 })

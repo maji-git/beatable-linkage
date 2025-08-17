@@ -9,37 +9,39 @@ const deviceStore = useDeviceStore()
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mt-3 rounded">
-        <div class="container-fluid">
-            <RouterLink class="navbar-brand" to="/"><img src="../assets/logo.png" height="34" alt=""></RouterLink>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <RouterLink class="nav-link" aria-current="page" to="/">Charts</RouterLink>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <div v-if="!deviceStore.deviceConnected">
-                        <button class="btn btn-outline-light" @click="initializeDevice()" type="submit">Connect your
-                            Headset</button>
-                    </div>
-                    <RouterLink to="/device" v-if="deviceStore.deviceConnected" class="device-info me-3">
-                        <IconCardboards/>
-                        <div class="ms-3">
-                            <p class="sub">Connected Device</p>
-                            <p class="dname">{{ deviceStore.currentDeviceInfo.productName }}</p>
+    <div class="container fixed-top">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary mt-3 rounded">
+            <div class="container-fluid">
+                <RouterLink class="navbar-brand" to="/"><img src="../assets/logo.png" height="34" alt=""></RouterLink>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <RouterLink class="nav-link" aria-current="page" to="/">Charts</RouterLink>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <div v-if="!deviceStore.deviceConnected">
+                            <button class="btn btn-outline-primary" @click="initializeDevice()" type="submit">Connect your
+                                Headset</button>
                         </div>
-                    </RouterLink>
+                        <RouterLink to="/device" v-if="deviceStore.deviceConnected" class="device-info me-3">
+                            <IconCardboards />
+                            <div class="ms-3">
+                                <p class="sub">Connected Device</p>
+                                <p class="dname">{{ deviceStore.currentDeviceInfo.productName }}</p>
+                            </div>
+                        </RouterLink>
+                    </div>
                 </div>
             </div>
-        </div>
-        <p class="text-center w-100 m-0 status-text" v-if="store.currentStatus">{{ store.currentStatus }}</p>
-    </nav>
+            <p class="text-center w-100 m-0 status-text" v-if="store.currentStatus">{{ store.currentStatus }}</p>
+        </nav>
+    </div>
 </template>
 
 <style scoped>

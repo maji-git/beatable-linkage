@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
 import { IconDownload } from '@tabler/icons-vue';
+import type { ISongModInfo } from '../types';
 
 defineProps<{
     songData: ISongModInfo

@@ -43,14 +43,14 @@
 </template>
 
 <script setup lang="ts">
-import { IconArrowUp, IconArrowUpRight, IconCloudUpload, IconDownload, IconExternalLink } from '@tabler/icons-vue';
+import { IconArrowUp, IconArrowUpRight, IconDownload, IconExternalLink } from '@tabler/icons-vue';
 import SoundtrackStats from './SoundtrackStats.vue';
 import SoundtrackTags from './SoundtrackTags.vue';
 import { downloadChartIndividual } from '../utils/chart';
 import { downloadChartToDevice } from '../utils/device';
 import type { ISongModInfo } from '../types';
 
-const props = defineProps<{
+defineProps<{
     coverArt: string,
     songTitle: string
     songMapper: {

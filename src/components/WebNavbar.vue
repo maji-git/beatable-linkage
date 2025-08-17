@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router';
 import { useDeviceStore } from '../stores/device';
 import { useStore } from '../stores/store';
 import { initializeDevice } from '../utils/device';
-import { IconCardboards } from '@tabler/icons-vue';
+import { IconCardboards, IconPlugConnected } from '@tabler/icons-vue';
 const store = useStore()
 const deviceStore = useDeviceStore()
 </script>
@@ -26,7 +26,7 @@ const deviceStore = useDeviceStore()
                     </ul>
                     <div class="d-flex">
                         <div v-if="!deviceStore.deviceConnected">
-                            <button class="btn btn-outline-primary" @click="initializeDevice()" type="submit">Connect your
+                            <button class="btn btn-outline-primary" @click="initializeDevice()" type="submit"><IconPlugConnected class="me-2" :size="18"/>Connect your
                                 Headset</button>
                         </div>
                         <RouterLink to="/device" v-if="deviceStore.deviceConnected" class="device-info me-3">

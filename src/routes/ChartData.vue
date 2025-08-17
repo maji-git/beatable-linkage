@@ -12,13 +12,13 @@
                     </p>
                     <SoundtrackTags :songData="songData" />
                     <div class="mt-3">
-                        <button class="btn btn-light" @click="downloadChartToDevice(songData)">
+                        <button class="btn btn-primary" @click="downloadChartToDevice(songData)">
                             <IconArrowUp /> Upload to your headset
                         </button>
-                        <button class="btn btn-outline-light ms-2" @click="downloadChartIndividual(songData)">
+                        <button class="btn btn-outline-primary ms-2" @click="downloadChartIndividual(songData)">
                             <IconDownload /> Download
                         </button>
-                        <a class="btn btn-outline-light ms-2" target="_blank" :href="songData.profile_url">
+                        <a class="btn btn-outline-primary ms-2" target="_blank" :href="songData.profile_url">
                             <IconExternalLink />
                         </a>
                     </div>

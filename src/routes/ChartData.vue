@@ -2,7 +2,7 @@
     <div v-if="songData">
         <div class="st-info-container" :style="{ backgroundImage: `url(${songData.logo.thumb_320x180})` }">
             <div class="soundtrack-info">
-                <img :src="songData.logo.thumb_320x180" alt="">
+                <div :style="{ backgroundImage: `url(${songData.logo.original})` }" class="coverart" alt=""></div>
                 <div class="song-info p-3">
                     <h3>{{ songData.name }}</h3>
                     <p>mapped by
@@ -83,5 +83,20 @@ onMounted(async () => {
     backdrop-filter: blur(14px);
     display: flex;
     width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 576px) {
+    .soundtrack-info {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.coverart {
+    aspect-ratio: 1.5 / 1;
+    height: 220px;
+    background-position: center;
+    background-size: cover;
 }
 </style>

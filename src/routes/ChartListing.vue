@@ -32,7 +32,7 @@ onMounted(() => {
     -->
     <div class="spinner-border text-primary" role="status" v-if="loadingList"></div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center p-md-0 p-2">
         <SoundtrackCard v-for="song in songListing" :coverArt="song.logo.thumb_320x180" :songTitle="song.name" :songMapper="song.submitted_by" :songData="song"/>
     </div>
 

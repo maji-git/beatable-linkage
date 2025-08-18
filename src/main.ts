@@ -11,6 +11,10 @@ import routes from "./routes"
 import { createPinia } from 'pinia'
 import FloatingVue from 'floating-vue'
 import ToastPlugin from 'vue-toast-notification';
+import { Buffer } from "buffer"
+
+//@ts-expect-error Provide Buffer global for smart-arraybuffer
+globalThis.Buffer = Buffer
 
 const router = createRouter({
   history: createWebHistory(),

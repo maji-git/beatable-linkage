@@ -2,9 +2,7 @@
     <div class="st-card-container col-md-5 p-0 m-2" :style="{ 'background-image': `url(${coverArt})` }">
         <div class="soundtrack-card">
             <div class="coverart" :style="{ 'background-image': `url(${coverArt})` }">
-                <RouterLink :to="`/song/${songData.name_id}`" class="btn preview-song">
-                    <IconArrowUpRight />
-                </RouterLink>
+                <PreviewSongCover :songData="songData"/>
             </div>
 
             <div class="contents">
@@ -43,14 +41,19 @@
 </template>
 
 <script setup lang="ts">
-import { IconArrowUp, IconArrowUpRight, IconDownload, IconExternalLink } from '@tabler/icons-vue';
+import { IconArrowUp, IconDownload, IconExternalLink, IconPlayerPlay, IconPlayerStopFilled } from '@tabler/icons-vue';
 import SoundtrackStats from './SoundtrackStats.vue';
 import SoundtrackTags from './SoundtrackTags.vue';
 import { downloadChartIndividual } from '../utils/chart';
 import { downloadChartToDevice } from '../utils/device';
 import type { ISongModInfo } from '../types';
+import { previewSong } from '../utils/song-preview';
+import { useStore } from '../stores/store';
+import PreviewSongCover from './PreviewSongCover.vue';
 
-defineProps<{
+const store = useStore()
+
+const props = defineProps<{
     coverArt: string,
     songTitle: string
     songMapper: {
@@ -59,6 +62,10 @@ defineProps<{
     },
     songData: ISongModInfo
 }>()
+
+const runPreviewSong = () => {
+    previewSong(props.songData)
+}
 </script>
 
 <style scoped>
@@ -76,20 +83,6 @@ defineProps<{
     width: 100%;
     height: 100%;
     display: flex;
-}
-
-.preview-song {
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.preview-song:hover {
-    opacity: 1;
 }
 
 .coverart {

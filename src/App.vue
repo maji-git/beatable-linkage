@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import WebNavbar from './components/WebNavbar.vue';
 import Footer from './components/Footer.vue';
+import SongPreviewModal from './components/SongPreviewModal.vue';
 </script>
 
 <template>
@@ -11,5 +12,6 @@ import Footer from './components/Footer.vue';
       <RouterView />
       <Footer></Footer>
     </div>
+    <SongPreviewModal/>
   </div>
 </template>

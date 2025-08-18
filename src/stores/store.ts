@@ -1,5 +1,6 @@
 import mitt from 'mitt'
 import { defineStore } from 'pinia'
+import type { ISongModInfo } from '../types'
 const emitter = mitt()
 
 export const useEmitter = defineStore('mitt', {
@@ -12,7 +13,12 @@ export const useEmitter = defineStore('mitt', {
 export const useStore = defineStore('store', {
   state: () => {
     return {
-      currentStatus: ""
+      currentStatus: "",
+      songPreview: {
+        songPlayer: null as Howl | null,
+        playingID: "",
+        playingData: null as ISongModInfo | null
+      }
     }
   },
   actions: {

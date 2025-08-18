@@ -10,7 +10,6 @@ export function downloadChart(songData: ISongModInfo): Promise<{
         const arraybuffer = await fetch(songData.modfile.download.binary_url).then(
             res => res.arrayBuffer()
         );
-        console.log(arraybuffer)
 
         let unzipped = await unzip(arraybuffer);
         for (const [key,val] of Object.entries(unzipped.entries)) {

@@ -46,6 +46,8 @@ export async function previewSong(songData: ISongModInfo) {
             sound.play()
         })
     }
+
+    return beats
 }
 
 export async function stopSong() {

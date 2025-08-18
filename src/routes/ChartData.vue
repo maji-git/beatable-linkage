@@ -5,7 +5,7 @@
                 <div :style="{ backgroundImage: `url(${songData.logo.original})` }" class="coverart" alt="">
                     <PreviewSongCover :songData="songData"/>
                 </div>
-                <div class="song-info p-3">
+                <div class="song-info p-3 flex-grow-1">
                     <h3>{{ songData.name }}</h3>
                     <p>mapped by
                         <img :src="songData.submitted_by.avatar.thumb_50x50" class="avatar-img" alt="" height="20"> <a
@@ -25,15 +25,14 @@
                         </a>
                     </div>
                 </div>
+                <div>
+                    <div class="song-stats rounded m-3 ps-2 pe-2">
+                        <SoundtrackStats :songData="songData" :extraChartData="extraChartData" />
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <SoundtrackStats :songData="songData" />
-            </div>
-        </div>
-
+        
         <div class="card mt-3">
             <div class="card-header">
                 About this chart
@@ -55,14 +54,16 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import SoundtrackStats from '../components/SoundtrackStats.vue';
 import { IconArrowUp, IconDownload, IconExternalLink } from '@tabler/icons-vue';
-import { downloadChartIndividual } from '../utils/chart';
+import { downloadChart, downloadChartIndividual } from '../utils/chart';
 import SoundtrackTags from '../components/SoundtrackTags.vue';
 import type { ISongModInfo } from '../types';
 import { downloadChartToDevice } from '../utils/device';
 import PreviewSongCover from '../components/PreviewSongCover.vue';
+import { BeatableChartData, readBeats } from '../utils/beats-reader';
 
 const route = useRoute()
 const songData = ref<ISongModInfo>()
+const extraChartData = ref<BeatableChartData>()
 
 onMounted(async () => {
     const req = await axios.get(`/info/${route.params.id}`, {
@@ -70,6 +71,15 @@ onMounted(async () => {
     })
 
     songData.value = req.data
+
+    if (songData.value) {
+        const chart = await downloadChart(songData.value)
+        const chartData = readBeats(await chart.blob.arrayBuffer())
+
+        if (chartData) {
+            extraChartData.value = chartData
+        }
+    }
 })
 </script>
 
@@ -101,5 +111,9 @@ onMounted(async () => {
     height: 220px;
     background-position: center;
     background-size: cover;
+}
+
+.song-stats {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 </style>

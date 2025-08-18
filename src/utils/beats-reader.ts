@@ -16,7 +16,8 @@ export class BeatableChartData {
         songTitle: '',
         artist: '',
         totalLengthInSeconds: 0,
-        audioStartOffset: 0
+        audioStartOffset: 0,
+        bpm: 0
     };
 }
 
@@ -48,6 +49,9 @@ export function readBeats(content: ArrayBuffer) {
 
     result.songDetails.totalLengthInSeconds = reader.readFloatLE()
     result.songDetails.audioStartOffset = reader.readUInt32LE()
+
+    reader.readUInt32LE()
+    result.songDetails.bpm = reader.readUInt32LE()
 
     return result
 }

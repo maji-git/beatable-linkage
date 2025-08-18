@@ -41,19 +41,15 @@
 </template>
 
 <script setup lang="ts">
-import { IconArrowUp, IconDownload, IconExternalLink, IconPlayerPlay, IconPlayerStopFilled } from '@tabler/icons-vue';
+import { IconArrowUp, IconDownload, IconExternalLink } from '@tabler/icons-vue';
 import SoundtrackStats from './SoundtrackStats.vue';
 import SoundtrackTags from './SoundtrackTags.vue';
 import { downloadChartIndividual } from '../utils/chart';
 import { downloadChartToDevice } from '../utils/device';
 import type { ISongModInfo } from '../types';
-import { previewSong } from '../utils/song-preview';
-import { useStore } from '../stores/store';
 import PreviewSongCover from './PreviewSongCover.vue';
 
-const store = useStore()
-
-const props = defineProps<{
+defineProps<{
     coverArt: string,
     songTitle: string
     songMapper: {
@@ -62,10 +58,6 @@ const props = defineProps<{
     },
     songData: ISongModInfo
 }>()
-
-const runPreviewSong = () => {
-    previewSong(props.songData)
-}
 </script>
 
 <style scoped>

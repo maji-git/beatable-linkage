@@ -54,17 +54,14 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import SoundtrackStats from '../components/SoundtrackStats.vue';
-import { IconArrowUp, IconDownload, IconExternalLink, IconPlayerPlay, IconPlayerStopFilled } from '@tabler/icons-vue';
+import { IconArrowUp, IconDownload, IconExternalLink } from '@tabler/icons-vue';
 import { downloadChartIndividual } from '../utils/chart';
 import SoundtrackTags from '../components/SoundtrackTags.vue';
 import type { ISongModInfo } from '../types';
 import { downloadChartToDevice } from '../utils/device';
-import { previewSong } from '../utils/song-preview';
-import { useStore } from '../stores/store';
 import PreviewSongCover from '../components/PreviewSongCover.vue';
 
 const route = useRoute()
-const store = useStore()
 const songData = ref<ISongModInfo>()
 
 onMounted(async () => {

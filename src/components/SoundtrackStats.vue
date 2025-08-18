@@ -49,7 +49,7 @@ defineProps<{
 }
 
 .stats > div {
-    margin: 8px;
+    margin: 4px;
 }
 
 .stats .tabler-icon {

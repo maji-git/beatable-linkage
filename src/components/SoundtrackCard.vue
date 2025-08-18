@@ -2,12 +2,12 @@
     <div class="st-card-container col-md-5 p-0 m-2" :style="{ 'background-image': `url(${coverArt})` }">
         <div class="soundtrack-card">
             <div class="coverart" :style="{ 'background-image': `url(${coverArt})` }">
-                <PreviewSongCover :songData="songData"/>
+                <PreviewSongCover :songData="songData" />
             </div>
 
-            <div class="contents">
+            <RouterLink :to="`/song/${songData.name_id}`" class="contents">
                 <div class="song-metadata">
-                    <RouterLink :to="`/song/${songData.name_id}`" class="song-title">{{ songTitle }}</RouterLink>
+                    <p class="song-title">{{ songTitle }}</p>
                     <p>mapped by <a :href="songMapper.profile_url">{{ songMapper.username }}</a></p>
                     <SoundtrackTags :songData="songData" />
                 </div>
@@ -15,7 +15,7 @@
                 <div>
                     <SoundtrackStats :songData="songData" />
                 </div>
-            </div>
+            </RouterLink>
             <div class="buttons chart-options">
                 <VTooltip placement="right-start">
                     <button class="btn" @click="downloadChartToDevice(songData)">
@@ -92,6 +92,8 @@ defineProps<{
     justify-content: space-between;
     flex-grow: 1;
     width: 1px;
+    color: whitesmoke;
+    text-decoration: none;
 }
 
 .song-metadata {
